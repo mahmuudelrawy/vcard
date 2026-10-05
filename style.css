@@ -1,0 +1,230 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f5f5f5;
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* طبقة الفيديو الافتتاحي التلقائي */
+.intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #000000;
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease;
+}
+
+.intro-overlay video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.intro-overlay.hide {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* الكارت الرئيسي */
+.card-container {
+    background-color: #000000;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 40px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+/* حاوية الصورة */
+.profile-img-container {
+    position: relative;
+    width: 100%;
+    background-color: #000000;
+}
+
+/* فيديو البروفايل بدل الصورة */
+.profile-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+.fade-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+}
+
+/* حاوية المحتوى الداخلي */
+.card-content {
+    padding: 30px 30px 40px 30px;
+    transition: opacity 0.4s ease-in-out;
+}
+
+/* الاسم */
+.name {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.1rem;          
+    font-weight: 800;
+    color: #ffffff;             
+    margin-bottom: 8px;
+    letter-spacing: -0.8px;
+    text-transform: none;       
+    white-space: nowrap;
+}
+
+/* تنسيق المسمى الوظيفي والقائمة المنسدلة */
+.title-container {
+    cursor: pointer;
+    margin-bottom: 30px;
+    display: inline-block;
+    user-select: none;
+}
+
+.title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.05rem;          
+    font-weight: 500;
+    color: #cccccc;
+    letter-spacing: 0.2px;      
+    text-transform: none;       
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title-details {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+}
+
+.title-details.show {
+    max-height: 50px;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.title-details p {
+    font-size: 0.85rem;
+    color: #008cd2;
+    font-weight: 500;
+}
+
+.title-details strong {
+    color: #ffffff;
+}
+
+/* زر الاتصال */
+.cta-button {
+    display: block;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    color: #000000;
+    font-family: 'Montserrat', sans-serif;
+    padding: 15px 20px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 35px;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #ffffff;
+}
+
+/* الأيقونات */
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin-bottom: 0;
+    transition: max-height 0.4s ease, opacity 0.4s ease, margin-bottom 0.4s ease;
+}
+
+.social-icons.show {
+    max-height: 60px;
+    opacity: 1;
+    margin-bottom: 35px;
+}
+
+.social-icons a {
+    color: #ffffff;
+    font-size: 1.7rem;
+    text-decoration: none;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.social-icons a:hover {
+    transform: translateY(-3px);
+}
+
+.social-icons .whatsapp:hover { color: #25D366; }
+.social-icons .phone:hover { color: #34b7f1; }
+.social-icons .email:hover { color: #ea4335; }
+.social-icons .instagram:hover { color: #e1306c; }
+.social-icons .tiktok:hover { color: #00f2fe; }
+
+/* السطر الأخير */
+.tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    color: #555555;
+    margin-top: 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* ضبط التنسيق لشاشات الموبايل */
+@media (max-width: 480px) {
+    body {
+        background-color: #000000;
+        padding: 0;
+    }
+
+    .card-container {
+        max-width: 100%;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
+        background-color: #000000;
+    }
+    
+    .card-content {
+        padding: 30px 20px 40px 20px;
+    }
+}

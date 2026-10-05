@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud Mahran</title>
+    
+    <!-- كود أيقونة حرف M الرصاصي الشفاف للتاب -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4,26 L4,6 L10,6 L16,16 L22,6 L28,6 L28,26 L23,26 L23,12 L17.5,21 L14.5,21 L9,12 L9,26 Z' fill='%23888888'/%3E%3C/svg%3E">
+
+    <!-- ربط مكتبة FontAwesome الرسمية -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- استدعاء خط Montserrat بالشكل الصحيح -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- شاشة الفيديو الافتتاحي عند تشغيل الرابط -->
+    <div id="intro-overlay" class="intro-overlay">
+        <video id="intro2-video" src="intro2.mp4" playsinline autoplay muted preload="auto"></video>
+    </div>
+
+    <div class="card-container">
+        
+        <!-- حاوية الصورة والفيديو -->
+        <div class="profile-img-container">
+            <!-- فيديو البروفايل: شغال لوحده وبيعيد نفسه طول الوقت -->
+            <!-- الصورة profile.jpeg بتظهر كـ poster لحد ما الفيديو يحمّل أو لو التشغيل التلقائي اتمنع -->
+            <video id="profile-video" class="profile-video" poster="profile.jpeg"
+                   autoplay muted loop playsinline preload="auto"
+                   disablepictureinpicture disableremoteplayback
+                   aria-label="محمود مهران">
+                <source src="profile.mp4" type="video/webm">
+                <!-- اختياري: لو عملت نسخة mp4 ضيفها هنا كاحتياطي للأيفونات القديمة -->
+                <!-- <source src="profile.mp4" type="video/mp4"> -->
+            </video>
+            <div class="fade-overlay" id="fade-overlay"></div>
+        </div>
+
+        <!-- محتوى الكارت الداخلي -->
+        <div class="card-content" id="card-content">
+            
+            <h1 class="name">Mahmoud Mahran</h1>
+            
+            <!-- المسمى الوظيفي التفاعلي بدون سهم -->
+            <div class="title-container" id="title-container">
+                <h2 class="title">IT-System-Elektroniker</h2>
+                <div class="title-details" id="title-details">
+                    <p>Auszubildender bei der <strong>PKE Deutschland GmbH</strong></p>
+                </div>
+            </div>
+
+            <!-- زر الاتصال -->
+            <button id="contact-btn" class="cta-button">Contact Me</button>
+
+            <!-- قسم الأيقونات مع إضافة تيك توك -->
+            <div class="social-icons" id="social-icons">
+                <a href="https://wa.me/4915222852550" target="_blank" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:+4915222852550" class="phone"><i class="fa-solid fa-phone"></i></a>
+                <a href="mailto:mahmuud.mahran@gmail.com" class="email"><i class="fa-solid fa-envelope"></i></a>
+                <a href="https://instagram.com/mahmoudelrawy" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
+
+            </div>
+            
+            <p class="tagline">© 2026 Mahmoud Mahran. All Rights Reserved.</p>
+            
+        </div>
+
+    </div>
+
+<script>
+    // تشغيل وإخفاء الفيديو الافتتاحي intro2
+    const introOverlay = document.getElementById('intro-overlay');
+    const intro2Video = document.getElementById('intro2-video');
+
+    function hideIntro() {
+        introOverlay.classList.add('hide');
+        setTimeout(() => {
+            introOverlay.style.display = 'none';
+        }, 600);
+    }
+
+    if (intro2Video) {
+        intro2Video.addEventListener('ended', hideIntro);
+        // في حال تعذر التشغيل التلقائي بسبب قيود بعض المتصفحات يتم الدخول فوراً
+        intro2Video.play().catch(() => hideIntro());
+    }
+
+    // التحكم في زر Contact Me وإظهار الأيقونات مع السكرول
+    const contactBtn = document.getElementById('contact-btn');
+    const socialIcons = document.getElementById('social-icons');
+
+    contactBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        socialIcons.classList.toggle('show');
+
+        if (socialIcons.classList.contains('show')) {
+            setTimeout(() => {
+                socialIcons.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100); 
+        }
+    });
+
+    // التحكم في إظهار تفاصيل اللقب الوظيفي (PKE)
+    const titleContainer = document.getElementById('title-container');
+    const titleDetails = document.getElementById('title-details');
+
+    titleContainer.addEventListener('click', (e) => {
+        e.stopPropagation();
+        titleDetails.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+        socialIcons.classList.remove('show');
+    });
+
+    // فيديو البروفايل: لو المتصفح منع التشغيل التلقائي (زي وضع توفير الطاقة في الأيفون)
+    // نحاول نشغله تاني مع أول لمسة على الشاشة
+    const profileVideo = document.getElementById('profile-video');
+
+    function tryPlayProfile() {
+        if (profileVideo && profileVideo.paused) {
+            profileVideo.play().catch(() => {});
+        }
+    }
+
+    tryPlayProfile();
+    document.addEventListener('touchstart', tryPlayProfile, { once: true, passive: true });
+    document.addEventListener('click', tryPlayProfile, { once: true });
+</script>
+</body>
+</html>
