@@ -2,7 +2,8 @@
 <html lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#000000">
     <title>Mahmoud Mahran</title>
     
     <!-- كود أيقونة حرف M الرصاصي الشفاف للتاب -->
@@ -39,7 +40,6 @@
                 <!-- اختياري: لو عملت نسخة mp4 ضيفها هنا كاحتياطي للأيفونات القديمة -->
                 <!-- <source src="profile.mp4" type="video/mp4"> -->
             </video>
-            <div class="fade-overlay" id="fade-overlay"></div>
         </div>
 
         <!-- محتوى الكارت الداخلي -->
@@ -64,7 +64,6 @@
                 <a href="tel:+4915222852550" class="phone"><i class="fa-solid fa-phone"></i></a>
                 <a href="mailto:mahmuud.mahran@gmail.com" class="email"><i class="fa-solid fa-envelope"></i></a>
                 <a href="https://instagram.com/mahmoudelrawy" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
-
             </div>
             
             <p class="tagline">© 2026 Mahmoud Mahran. All Rights Reserved.</p>
@@ -98,12 +97,6 @@
     contactBtn.addEventListener('click', (e) => {
         e.stopPropagation();
         socialIcons.classList.toggle('show');
-
-        if (socialIcons.classList.contains('show')) {
-            setTimeout(() => {
-                socialIcons.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            }, 100); 
-        }
     });
 
     // التحكم في إظهار تفاصيل اللقب الوظيفي (PKE)
