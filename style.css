@@ -177,7 +177,7 @@ body {
 .social-icons {
     display: flex;
     justify-content: center;
-    gap: 22px;
+    gap: 20px;
     max-height: 0;
     opacity: 0;
     overflow: hidden;
@@ -202,11 +202,11 @@ body {
     transform: translateY(-3px);
 }
 
+.social-icons .add-contact:hover { color: #34c759; }
 .social-icons .whatsapp:hover { color: #25D366; }
 .social-icons .phone:hover { color: #34b7f1; }
 .social-icons .email:hover { color: #ea4335; }
 .social-icons .instagram:hover { color: #e1306c; }
-.social-icons .tiktok:hover { color: #00f2fe; }
 
 /* السطر الأخير */
 .tagline {
