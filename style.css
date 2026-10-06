@@ -27,29 +27,6 @@ body {
     padding: 20px;
 }
 
-/* طبقة الفيديو الافتتاحي التلقائي */
-.intro-overlay {
-    position: fixed;
-    inset: 0;
-    background-color: #000000;
-    z-index: 99999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.6s ease;
-}
-
-.intro-overlay video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.intro-overlay.hide {
-    opacity: 0;
-    pointer-events: none;
-}
-
 /* الكارت الرئيسي (على الكمبيوتر بيظهر ككارت في النص) */
 .card-container {
     position: relative;
@@ -246,4 +223,55 @@ body {
     .title-container { margin-bottom: 12px; }
     .tagline { margin-top: 10px; }
     .card-content { padding-top: 50px; }
+}
+
+/* ===== الدخلة السينمائية (بدل فيديو الإنترو) ===== */
+/* الفيديو بيظهر من السواد مع زووم آوت خفيف */
+.profile-img-container {
+    animation: videoReveal 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+/* الخلفية المتدرجة ورا الكلام بتظهر مع الفيديو */
+.card-content {
+    animation: fadeIn 1s ease 0.2s both;
+}
+
+/* الاسم والمسمى والزرار والسطر الأخير بيطلعوا من تحت واحد ورا التاني */
+.name,
+.title-container,
+.cta-button,
+.tagline {
+    animation: riseIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+.name            { animation-delay: 0.35s; }
+.title-container { animation-delay: 0.5s; }
+.cta-button      { animation-delay: 0.65s; }
+.tagline         { animation-delay: 0.8s; }
+
+@keyframes videoReveal {
+    from { opacity: 0; transform: scale(1.06); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes riseIn {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* لو الموبايل مفعّل عليه "تقليل الحركة" نلغي الأنيميشن */
+@media (prefers-reduced-motion: reduce) {
+    .profile-img-container,
+    .card-content,
+    .name,
+    .title-container,
+    .cta-button,
+    .tagline {
+        animation: none;
+    }
 }

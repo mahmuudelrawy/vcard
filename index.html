@@ -21,11 +21,6 @@
 </head>
 <body>
 
-    <!-- شاشة الفيديو الافتتاحي عند تشغيل الرابط -->
-    <div id="intro-overlay" class="intro-overlay">
-        <video id="intro2-video" src="intro2.mp4" playsinline autoplay muted preload="auto"></video>
-    </div>
-
     <div class="card-container">
         
         <!-- حاوية الصورة والفيديو -->
@@ -72,24 +67,7 @@
     </div>
 
 <script>
-    // تشغيل وإخفاء الفيديو الافتتاحي intro2
-    const introOverlay = document.getElementById('intro-overlay');
-    const intro2Video = document.getElementById('intro2-video');
-
-    function hideIntro() {
-        introOverlay.classList.add('hide');
-        setTimeout(() => {
-            introOverlay.style.display = 'none';
-        }, 600);
-    }
-
-    if (intro2Video) {
-        intro2Video.addEventListener('ended', hideIntro);
-        // في حال تعذر التشغيل التلقائي بسبب قيود بعض المتصفحات يتم الدخول فوراً
-        intro2Video.play().catch(() => hideIntro());
-    }
-
-    // التحكم في زر Contact Me وإظهار الأيقونات مع السكرول
+    // التحكم في زر Contact Me وإظهار الأيقونات
     const contactBtn = document.getElementById('contact-btn');
     const socialIcons = document.getElementById('social-icons');
 
