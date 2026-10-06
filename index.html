@@ -17,6 +17,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&display=swap" rel="stylesheet">
     
+    <!-- تحميل صورة أول فريم قبل أي حاجة عشان تظهر فوراً -->
+    <link rel="preload" as="image" href="poster.jpg" fetchpriority="high">
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,9 +28,11 @@
         
         <!-- حاوية الصورة والفيديو -->
         <div class="profile-img-container">
-            <!-- فيديو البروفايل: شغال لوحده وبيعيد نفسه طول الوقت -->
-            <!-- الصورة profile.jpeg بتظهر كـ poster لحد ما الفيديو يحمّل أو لو التشغيل التلقائي اتمنع -->
-            <video id="profile-video" class="profile-video" poster="profile.jpeg"
+            <!-- أول فريم من الفيديو كصورة: بتظهر فوراً ومن غير أي شاشة سودا -->
+            <img src="poster.jpg" class="profile-poster" alt="" aria-hidden="true">
+
+            <!-- فيديو البروفايل: بيظهر فوق الصورة أول ما يبدأ يشتغل فعلاً -->
+            <video id="profile-video" class="profile-video" poster="poster.jpg"
                    autoplay muted loop playsinline preload="auto"
                    disablepictureinpicture disableremoteplayback
                    aria-label="محمود مهران">
@@ -89,10 +94,20 @@
         socialIcons.classList.remove('show');
     });
 
-    // فيديو البروفايل: لو المتصفح منع التشغيل التلقائي (زي وضع توفير الطاقة في الأيفون)
-    // نحاول نشغله تاني مع أول لمسة على الشاشة
+    // فيديو البروفايل: بيفضل مخفي لحد ما يبدأ يتحرك فعلاً، وبعدين يظهر فوق الصورة
     const profileVideo = document.getElementById('profile-video');
 
+    function showVideo() {
+        profileVideo.classList.add('is-playing');
+    }
+
+    if (profileVideo) {
+        profileVideo.addEventListener('playing', showVideo);
+        if (!profileVideo.paused && profileVideo.readyState >= 3) showVideo();
+    }
+
+    // لو المتصفح منع التشغيل التلقائي (زي وضع توفير الطاقة في الأيفون)
+    // الصورة بتفضل ظاهرة، ونحاول نشغل الفيديو تاني مع أول لمسة
     function tryPlayProfile() {
         if (profileVideo && profileVideo.paused) {
             profileVideo.play().catch(() => {});
