@@ -237,7 +237,9 @@ body {
 }
 
 /* ===== الدخلة السينمائية (بدل فيديو الإنترو) ===== */
-/* الفيديو بيظهر من السواد مع زووم آوت خفيف */
+/* الترتيب: الفيديو ← الاسم يتكشف من ورا خط خفي ← لمعة على الاسم ← اللقب ← الزرار ← سطر الحقوق */
+
+/* 1) الفيديو بيظهر من السواد مع زووم آوت خفيف */
 .profile-img-container {
     animation: videoReveal 1.4s cubic-bezier(0.22, 0.61, 0.36, 1) both;
 }
@@ -247,18 +249,45 @@ body {
     animation: fadeIn 1s ease 0.2s both;
 }
 
-/* الاسم والمسمى والزرار والسطر الأخير بيطلعوا من تحت واحد ورا التاني */
-.name,
-.title-container,
-.cta-button,
-.tagline {
-    animation: riseIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+/* 2) الاسم: بيطلع من ورا خط مش باين (الـ h1 بيقص اللي برّاه) */
+.name {
+    overflow: hidden;
+    padding: 0.06em 0.12em 0.1em;
+    text-shadow: none;
 }
 
-.name            { animation-delay: 0.35s; }
-.title-container { animation-delay: 0.5s; }
-.cta-button      { animation-delay: 0.65s; }
-.tagline         { animation-delay: 0.8s; }
+.name-inner {
+    display: inline-block;
+    /* لون بلاتيني مع شريط نور بيعدي مرة واحدة */
+    background-image: linear-gradient(105deg,
+        #e4e4e4 0%, #e4e4e4 42%,
+        #ffffff 46%, #f5d896 50%, #ffffff 54%,
+        #e4e4e4 58%, #e4e4e4 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #e4e4e4;
+    filter: drop-shadow(0 2px 10px rgba(0, 0, 0, 0.55));
+    animation:
+        maskUp 0.95s cubic-bezier(0.19, 1, 0.22, 1) 0.5s both,
+        shine 1.3s ease-in-out 1.45s both;
+}
+
+/* 3) اللقب: بيظهر وحروفه بتقرب من بعض لحد ما تستقر */
+.title {
+    animation: titleIn 1s cubic-bezier(0.22, 0.61, 0.36, 1) 0.85s both;
+}
+
+/* 4) الزرار وسطر الحقوق بيطلعوا من تحت */
+.cta-button {
+    animation: riseIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.15s both;
+}
+
+.tagline {
+    animation: riseIn 0.8s cubic-bezier(0.22, 0.61, 0.36, 1) 1.35s both;
+}
 
 @keyframes videoReveal {
     from { opacity: 0; transform: scale(1.06); }
@@ -270,6 +299,21 @@ body {
     to   { opacity: 1; }
 }
 
+@keyframes maskUp {
+    from { transform: translateY(115%); }
+    to   { transform: translateY(0); }
+}
+
+@keyframes shine {
+    from { background-position: 100% 0; }
+    to   { background-position: 0% 0; }
+}
+
+@keyframes titleIn {
+    from { opacity: 0; letter-spacing: 0.35em; filter: blur(4px); }
+    to   { opacity: 1; letter-spacing: 0.2px;  filter: blur(0); }
+}
+
 @keyframes riseIn {
     from { opacity: 0; transform: translateY(18px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -279,8 +323,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
     .profile-img-container,
     .card-content,
-    .name,
-    .title-container,
+    .name-inner,
+    .title,
     .cta-button,
     .tagline {
         animation: none;
