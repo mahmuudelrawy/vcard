@@ -43,7 +43,7 @@
         <!-- محتوى الكارت الداخلي -->
         <div class="card-content" id="card-content">
             
-            <h1 class="name"><span class="name-inner">Mahmoud Mahran</span></h1>
+            <h1 class="name">Mahmoud Mahran</h1>
             
             <!-- المسمى الوظيفي التفاعلي بدون سهم -->
             <div class="title-container" id="title-container">
@@ -67,6 +67,16 @@
             
             <p class="tagline">© 2026 Mahmoud Mahran. All Rights Reserved.</p>
             
+        </div>
+
+        <!-- الدخلة: بابين أسود بيتفتحوا على نور أبيض والكاميرا بتعدّي منهم -->
+        <div class="intro-scene" id="intro-scene" aria-hidden="true">
+            <div class="intro-light"></div>
+            <div class="intro-doors">
+                <div class="intro-door left"><div class="intro-shade"></div></div>
+                <div class="intro-door right"><div class="intro-shade"></div></div>
+            </div>
+            <div class="intro-seam"></div>
         </div>
 
     </div>
@@ -117,6 +127,12 @@
     tryPlayProfile();
     document.addEventListener('touchstart', tryPlayProfile, { once: true, passive: true });
     document.addEventListener('click', tryPlayProfile, { once: true });
+    // بعد ما الدخلة تخلص بنشيل طبقة الأبواب من الصفحة خالص
+    setTimeout(() => {
+        const introScene = document.getElementById('intro-scene');
+        if (introScene) introScene.remove();
+    }, 3200);
+
 </script>
 </body>
 </html>
