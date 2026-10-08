@@ -24,6 +24,12 @@
 </head>
 <body>
 
+    <!-- خلفية الشاشات الكبيرة: نفس الفيديو مكبّر ومغبّش ورا الكارت -->
+    <div class="ambient" aria-hidden="true">
+        <img src="poster.jpg" alt="">
+        <video id="ambient-video" muted loop playsinline preload="none"></video>
+    </div>
+
     <div class="card-container">
         
         <!-- حاوية الصورة والفيديو -->
@@ -47,9 +53,9 @@
             
             <!-- المسمى الوظيفي التفاعلي بدون سهم -->
             <div class="title-container" id="title-container">
-                <h2 class="title">IT-System-Elektroniker</h2>
+                <h2 class="title">AI &amp; Automation Developer</h2>
                 <div class="title-details" id="title-details">
-                    <p>Auszubildender bei der <strong>PKE Deutschland GmbH</strong></p>
+                    <p>Founder · <strong>Mahran Studio</strong></p>
                 </div>
             </div>
 
@@ -59,8 +65,8 @@
             <!-- قسم الأيقونات -->
             <div class="social-icons" id="social-icons">
                 <a href="Mahmoud-Mahran.vcf" class="add-contact" aria-label="Add Contact"><i class="fa-solid fa-user-plus"></i></a>
-                <a href="https://wa.me/4915222852550" target="_blank" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
-                <a href="tel:+4915222852550" class="phone"><i class="fa-solid fa-phone"></i></a>
+                <a href="https://wa.me/491781359127" target="_blank" class="whatsapp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="tel:+491781359127" class="phone"><i class="fa-solid fa-phone"></i></a>
                 <a href="mailto:mahmuud.mahran@gmail.com" class="email"><i class="fa-solid fa-envelope"></i></a>
                 <a href="https://instagram.com/mahmoudelrawy" target="_blank" class="instagram"><i class="fa-brands fa-instagram"></i></a>
             </div>
@@ -91,7 +97,7 @@
         socialIcons.classList.toggle('show');
     });
 
-    // التحكم في إظهار تفاصيل اللقب الوظيفي (PKE)
+    // التحكم في إظهار تفاصيل اللقب (Founder · Mahran Studio)
     const titleContainer = document.getElementById('title-container');
     const titleDetails = document.getElementById('title-details');
 
@@ -132,6 +138,20 @@
         const introScene = document.getElementById('intro-scene');
         if (introScene) introScene.remove();
     }, 3200);
+
+    // الشاشات الكبيرة بس: نشغّل فيديو الخلفية المغبّش (الموبايل مش بيحمّله خالص)
+    if (window.matchMedia('(min-width: 481px)').matches) {
+        const ambientVideo = document.getElementById('ambient-video');
+        ambientVideo.src = 'profile.mp4';
+        ambientVideo.play().catch(() => {});
+        // نخلي الخلفية ماشية مع فيديو الكارت
+        if (profileVideo) {
+            profileVideo.addEventListener('playing', () => {
+                ambientVideo.currentTime = profileVideo.currentTime;
+                ambientVideo.play().catch(() => {});
+            });
+        }
+    }
 
 </script>
 </body>
